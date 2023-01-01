@@ -12,16 +12,18 @@ const createElement = () => {
     name: addTaskInput.value,
     isDone: false,
   });
+
   let element;
   let button;
   for (const task of tasks) {
     element = document.createElement('li');
+    button = document.createElement('button');
+
     element.id = task.id;
     element.className = 'task';
     element.innerText = `${task.name} | ${isDoneEmoji[task.isDone]}`;
     element.addEventListener('click', () => doneTask(task, element));
 
-    button = document.createElement('button');
     button.id = task.id;
     button.className = 'taskButton';
     button.innerText = 'Delete task';
