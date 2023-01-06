@@ -5,22 +5,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do APP</title>
+  <title>To-Do</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>⭐To-Do App</h1>
+  <h1>⭐To-Do</h1>
   <p>
-    Enter your tasks below<br>
+    Enter your task and click <b>Add task</b><br>
     You can done or undone tasks by clicking it<br>
-    If you want to remove task click delete task button
+    If you want to remove task click <b>Delete task</b> button
   </p>
-  <input type="text" id="addTaskInput" placeholder="Task Name">
-  <button id="addTaskButton">Add Task</button>
-  <div id="taskList">
+  <input type="text" id="addTaskInput" placeholder="Task name">
+  <button id="addTaskButton">Add task</button>
+  <div id="taskListDiv">
+    <ul id="taskList"></ul>
   </div>
   <script src="index.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  </style>
 </body>
 
 </html>

@@ -1,7 +1,23 @@
 body {
-  font-family: monospace;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  background-color: #212121;
 }
-
+ul {
+  margin: 15px;
+  padding: 0;
+}
+input {
+  background-color: #1e1c1c;
+  border: none;
+  color: white;
+}
+button {
+  background-color: #1e1c1c;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
 .task {
   cursor: pointer;
 }
