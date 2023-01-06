@@ -2,7 +2,7 @@
 
 Supported features:
 
-- Add Task
+- Add task
 - Mark task as ✅Done
 - Mark task as ❌Undone
 - Remove task
