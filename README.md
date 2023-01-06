@@ -1,6 +1,14 @@
-# To-Do-App
-To-Do JS Application
+# ⭐To-Do in JavaScript
 
-Click **Add Task** button to add task <br>
-If you want to mark task as **Done** click on it <br>
-For task delete click **Delete Task** button
+Supported features:
+
+- Add Task
+- Mark task as ✅Done
+- Mark task as ❌Undone
+- Remove task
+
+Try it on this **[website](https://piaseckijulian.github.io/To-Do/)**
+
+## Credits
+
+**HTML, CSS & JavaScript**: **[@piaseckijulian](https://github.com/piaseckijulian)**
