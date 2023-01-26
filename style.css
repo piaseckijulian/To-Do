@@ -1,22 +1,27 @@
 body {
   font-family: 'Roboto', sans-serif;
-  color: white;
   background-color: #212121;
+  color: white;
+  text-align: center;
+  font-size: 30px;
 }
-ul {
-  margin: 15px;
-  padding: 0;
-}
-input {
+#taskInput {
+  font-size: 30px;
   background-color: #1e1c1c;
   border: none;
   color: white;
 }
-button {
+.button {
+  font-size: 30px;
+  color: white;
   background-color: #1e1c1c;
   border: none;
-  color: white;
   cursor: pointer;
+}
+#deleteBtn,
+#editBtn,
+#statusBtn {
+  margin-left: 15px;
 }
 .task {
   cursor: pointer;

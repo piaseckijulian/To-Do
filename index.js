@@ -1,84 +1,155 @@
-/* Getting the elements from the HTML file. */
 const taskList = document.getElementById('taskList');
-const addTaskInput = document.getElementById('addTaskInput');
-const addTaskBtn = document.getElementById('addTaskButton');
+const taskInput = document.getElementById('taskInput');
+const taskBtn = document.getElementById('taskBtn');
 
-/* Creating an empty array. */
 let tasks = [];
+let id = tasks.length - 1;
 
-/* Calling the function `createElement()` when the button is clicked. */
-addTaskBtn.onclick = () => createElement();
+const isDoneEmoji = {
+  false: '❌',
+  true: '✅',
+};
 
-/**
- * It creates a new task and adds it to the list.
- */
-const createElement = () => {
+const addTask = () => {
+  id += 1;
+  taskList.innerHTML = '';
   tasks.push({
-    id: tasks.length,
-    name: addTaskInput.value,
+    id: id,
+    name: taskInput.value,
     isDone: false,
   });
 
-  let element;
-  let button;
-
   for (const task of tasks) {
-    element = document.createElement('li');
-    button = document.createElement('button');
+    const taskElement = document.createElement('li');
+    const deleteBtn = document.createElement('button');
+    const editBtn = document.createElement('button');
+    const statusBtn = document.createElement('button');
 
-    element.id = task.id;
-    element.className = 'task';
-    element.innerText = `⟨${isDoneEmoji[task.isDone]}⟩ ${task.name}`;
-    element.addEventListener('click', () => doneTask(task, element));
+    taskElement.innerText = `(${isDoneEmoji[task.isDone]}) ${task.name}`;
+    taskElement.className = 'task';
 
-    button.id = task.id;
-    button.className = 'taskBtn';
-    button.innerText = 'Delete task';
-    button.addEventListener('click', () => removeTask(task, element, button));
+    deleteBtn.innerText = 'Delete task';
+    deleteBtn.className = 'button';
+    deleteBtn.id = 'deleteBtn';
+    deleteBtn.onclick = () => deleteTask(task, taskElement);
+
+    editBtn.innerText = 'Edit task';
+    editBtn.className = 'button';
+    editBtn.id = 'editBtn';
+    editBtn.onclick = () => editTask(task, taskElement);
+
+    statusBtn.innerText = 'Mark as done';
+    statusBtn.className = 'button';
+    statusBtn.id = 'statusBtn';
+    statusBtn.onclick = () => doneTask(task, taskElement);
+
+    taskList.appendChild(taskElement);
+    taskElement.appendChild(deleteBtn);
+    taskElement.appendChild(editBtn);
+    taskElement.appendChild(statusBtn);
   }
-  taskList.appendChild(element);
-  taskList.appendChild(button);
 };
 
-/* An object that contains the emojis that will be used to show if the task is done or not. */
-const isDoneEmoji = {
-  true: '✅',
-  false: '❌',
-};
-
-/**
- * When the user clicks on a task, the task is marked as done and the text is crossed out.
- * @param task - the task object
- * @param element - the element that was clicked
- */
-const doneTask = (task, element) => {
-  task.isDone = true;
-  element.style.textDecoration = 'line-through';
-  element.innerText = `⟨${isDoneEmoji[task.isDone]}⟩ ${task.name}`;
-  element.addEventListener('click', () => undoneTask(task, element));
-};
-
-/**
- * When the user clicks on a task, the task is undone and the text decoration is removed.
- * @param task - the task object
- * @param element - the element that was clicked
- */
-const undoneTask = (task, element) => {
-  task.isDone = false;
-  element.style.textDecoration = '';
-  element.innerText = `⟨${isDoneEmoji[task.isDone]}⟩ ${task.name}`;
-  element.addEventListener('click', () => doneTask(task, element));
-};
-
-/**
- * It removes the task from the DOM and from the tasks array.
- * @param task - the task object
- * @param element - the element that contains the task
- * @param button - the button that was clicked
- */
-const removeTask = (task, element, button) => {
-  element.parentNode.removeChild(element);
-  button.parentNode.removeChild(button);
+const deleteTask = (task, taskElement) => {
   const idToRemove = task.id;
   tasks = tasks.filter((item) => item.id !== idToRemove);
+
+  taskElement.remove();
 };
+
+const editTask = (task, taskElement) => {
+  taskBtn.innerText = 'Edit task';
+  taskBtn.onclick = () => {
+    task.name = taskInput.value;
+    const deleteBtn = document.createElement('button');
+    const editBtn = document.createElement('button');
+    const statusBtn = document.createElement('button');
+
+    editBtn.innerText = 'Edit task';
+    editBtn.className = 'button';
+    editBtn.id = 'editBtn';
+
+    deleteBtn.innerText = 'Delete task';
+    deleteBtn.className = 'button';
+    deleteBtn.id = 'deleteBtn';
+
+    statusBtn.innerText = 'Mark as done';
+    statusBtn.className = 'button';
+    statusBtn.id = 'statusBtn';
+
+    editBtn.onclick = () => editTask(task, taskElement);
+    deleteBtn.onclick = () => deleteTask(task, taskElement);
+    statusBtn.onclick = () => doneTask(task, taskElement);
+
+    taskElement.innerText = `(${isDoneEmoji[task.isDone]}) ${task.name}`;
+
+    taskElement.appendChild(deleteBtn);
+    taskElement.appendChild(editBtn);
+    taskElement.appendChild(statusBtn);
+
+    taskBtn.innerText = 'Add task';
+    taskBtn.onclick = () => addTask();
+  };
+};
+
+const doneTask = (task, taskElement) => {
+  task.isDone = true;
+
+  const deleteBtn = document.createElement('button');
+  const editBtn = document.createElement('button');
+  const statusBtn = document.createElement('button');
+
+  editBtn.innerText = 'Edit task';
+  editBtn.className = 'button';
+  editBtn.id = 'editBtn';
+
+  deleteBtn.innerText = 'Delete task';
+  deleteBtn.className = 'button';
+  deleteBtn.id = 'deleteBtn';
+
+  statusBtn.innerText = 'Mark as undone';
+  statusBtn.className = 'button';
+  statusBtn.id = 'statusBtn';
+
+  editBtn.onclick = () => editTask(task, taskElement);
+  deleteBtn.onclick = () => deleteTask(task, taskElement);
+  statusBtn.onclick = () => undoneTask(task, taskElement);
+
+  taskElement.innerText = `(${isDoneEmoji[task.isDone]}) ${task.name}`;
+
+  taskElement.appendChild(deleteBtn);
+  taskElement.appendChild(editBtn);
+  taskElement.appendChild(statusBtn);
+};
+
+const undoneTask = (task, taskElement) => {
+  task.isDone = false;
+
+  const deleteBtn = document.createElement('button');
+  const editBtn = document.createElement('button');
+  const statusBtn = document.createElement('button');
+
+  editBtn.innerText = 'Edit task';
+  editBtn.className = 'button';
+  editBtn.id = 'editBtn';
+
+  deleteBtn.innerText = 'Delete task';
+  deleteBtn.className = 'button';
+  deleteBtn.id = 'deleteBtn';
+
+  statusBtn.innerText = 'Mark as done';
+  statusBtn.className = 'button';
+  statusBtn.id = 'statusBtn';
+
+  editBtn.onclick = () => editTask(task, taskElement);
+  deleteBtn.onclick = () => deleteTask(task, taskElement);
+  statusBtn.onclick = () => doneTask(task, taskElement);
+
+  taskElement.innerText = `(${isDoneEmoji[task.isDone]}) ${task.name}`;
+
+  taskElement.appendChild(deleteBtn);
+  taskElement.appendChild(editBtn);
+  taskElement.appendChild(statusBtn);
+};
+
+taskBtn.onclick = addTask;

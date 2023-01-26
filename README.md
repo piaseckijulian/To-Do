@@ -3,9 +3,10 @@
 Supported features:
 
 - Add task
+- Remove task
+- Edit task
 - Mark task as ✅Done
 - Mark task as ❌Undone
-- Remove task
 
 Try it on this **[website](https://piaseckijulian.github.io/To-Do/)**
 
