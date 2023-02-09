@@ -59,6 +59,7 @@ const deleteTask = (task, taskElement) => {
 
 const editTask = (task, taskElement) => {
   taskBtn.innerText = 'Edit task';
+  taskInput.value = task.name;
   taskBtn.onclick = () => {
     task.name = taskInput.value;
     const deleteBtn = document.createElement('button');
